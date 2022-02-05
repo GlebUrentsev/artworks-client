@@ -1,0 +1,68 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "plugin:react/recommended",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["import", "@typescript-eslint", "react-hooks"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-console": "warn",
+    "linebreak-style": "off",
+    "react/function-component-definition": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "jsx-quotes": [1, "prefer-double"],
+    "import/no-unresolved": "off",
+    "react/jsx-filename-extension": [0, { "extensions": ["ts", "js", ".tsx", ".jsx"] }],
+    "semi": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-extraneous-dependencies": "off",
+    "class-methods-use-this": "warn",
+    "react/destructuring-assignment": "off",
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/indent": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "import/export": "off",
+    "max-params": ["error", 4],
+    "@typescript-eslint/prefer-interface": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/no-var-requires": 1,
+    "import/no-cycle": "error",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/prefer-stateless-function": "off",
+    "import/no-named-as-default": "warn",
+    "import/no-duplicates": "off",
+    "import/named": "off",
+    "prefer-promise-reject-errors": "off",
+    "react/require-default-props": "off",
+    "react/no-array-index-key": "warn",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["warn", { "functions": false }],
+    "consistent-return": "off",
+    "global-require": "warn",
+    "no-restricted-exports": "off",
+    "@typescript-eslint/naming-convention": "off"
+  }
+}

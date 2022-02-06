@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import LazyLoad from 'react-lazyload';
+
 import { INDENT } from '../../common/tokens/indent';
 import { COLORS } from '../../common/tokens/palette';
 
@@ -74,7 +76,9 @@ export const FeaturedPreview = () => {
       </TitleWrapper>
 
       <PreviewWrapper>
-        <FeaturedPreviewImage src={dogPic} alt="Dog" />
+        <LazyLoad>
+          <FeaturedPreviewImage src={dogPic} alt="Dog" />
+        </LazyLoad>
         <PreviewTooltip>Photo of the day</PreviewTooltip>
       </PreviewWrapper>
       <MobileButton upperCase onClick={() => alert('added to cart')}>

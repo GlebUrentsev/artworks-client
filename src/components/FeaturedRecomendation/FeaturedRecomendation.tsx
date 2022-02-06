@@ -1,5 +1,7 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
+
 import { INDENT } from '../../common/tokens/indent';
 import { COLORS } from '../../common/tokens/palette';
 import { adaptive } from '../../common/tokens/screen';
@@ -55,9 +57,15 @@ export const FeaturedRecomendation = () => {
     <RecommendationsContainer>
       <MainTypography>People also buy</MainTypography>
       <RecommendationsPreviews>
-        <RecommendationPreview src={recomend} alt="Recomend" />
-        <RecommendationPreview src={recomend} alt="Recomend" />
-        <RecommendationPreview src={recomend} alt="Recomend" />
+        <LazyLoad>
+          <RecommendationPreview src={recomend} alt="Recomend" />
+        </LazyLoad>
+        <LazyLoad>
+          <RecommendationPreview src={recomend} alt="Recomend" />
+        </LazyLoad>
+        <LazyLoad>
+          <RecommendationPreview src={recomend} alt="Recomend" />
+        </LazyLoad>
       </RecommendationsPreviews>
       <MainTypography>Details</MainTypography>
       <DetailsInfo>Size: 1020 x 1020 pixel</DetailsInfo>

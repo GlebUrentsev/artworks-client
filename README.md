@@ -34,3 +34,4 @@ First open of the demo can fetch data for a bit longer because it's ping heroku 
 1. Add ui-kit or lib (like meterial-ui) to avoid a lot styled components and dupticates
 2. Add redux to avoid a lot of react contexts
 3. Deploy backend to bolling service without delay (free heroku deploy needs ping)
+5. Add loaders or skeletons

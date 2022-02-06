@@ -8,7 +8,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   :root {
-      font-family: "Archivo";
+      font-family: "Archivo", sans-serif;
       ${fontSizeL};
   }
 `;

@@ -5,4 +5,5 @@ export const COLORS = {
   disabled: '#B4B4B4',
   white: '#ffffff',
   light: '#e4e4e4',
+  dark: '#1D1D1D',
 } as const;

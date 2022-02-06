@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AdaptiveLayout } from '../AdaptiveLayout';
 import { FeaturedProduct } from '../Featured';
-
+import { Photography } from '../Photography';
 import { Header } from '../../components/Header';
 import { ProductsProvider } from '../../state';
 
@@ -12,7 +12,7 @@ const App = () => {
       <AdaptiveLayout>
         <Header />
         <FeaturedProduct />
-        {/* Filtered products */}
+        <Photography />
       </AdaptiveLayout>
     </ProductsProvider>
   );

@@ -8,6 +8,7 @@ import { INDENT } from '../../common/tokens/indent';
 import { bottomDevider } from '../../styled-utils/bottom-devider';
 import { FeaturedRecomendation } from '../../components/FeaturedRecomendation';
 import { ProductsContext } from '../../state/ProductsProvider';
+import { getFeaturedProduct } from './utils';
 
 const ProductContainer = styled.div`
   margin-top: ${INDENT.xxl};
@@ -26,17 +27,21 @@ const ProductBottomContainer = styled.div`
 `;
 
 export const FeaturedProduct = () => {
-  const { data, isLoading, setSt } = React.useContext(ProductsContext);
-  console.log(data, isLoading);
+  const { products } = React.useContext(ProductsContext);
+  const featuredProduct = React.useMemo(() => getFeaturedProduct(products), [products]);
+
+  if (!featuredProduct) {
+    return null;
+  }
+
+  const { image, name, details, category } = featuredProduct;
+
   return (
     <ProductContainer>
-      <button type="button" onClick={() => setSt?.((prev) => !prev)}>
-        123
-      </button>
-      <FeaturedPreview />
+      <FeaturedPreview image={image} name={name} />
       <ProductBottomContainer>
-        <FeaturedDescription />
-        <FeaturedRecomendation />
+        <FeaturedDescription details={details} name={name} category={category} />
+        <FeaturedRecomendation details={details} />
       </ProductBottomContainer>
     </ProductContainer>
   );

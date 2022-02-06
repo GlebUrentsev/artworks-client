@@ -63,6 +63,8 @@
     "consistent-return": "off",
     "global-require": "warn",
     "no-restricted-exports": "off",
-    "@typescript-eslint/naming-convention": "off"
+    "@typescript-eslint/naming-convention": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-no-constructed-context-values": "off"
   }
 }

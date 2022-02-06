@@ -2,28 +2,42 @@ import React from 'react';
 import { useQuery } from 'react-query';
 
 import { getProducts } from '../common/requests';
+import { Product } from '../common/types/ProductTypes';
+import { reducer } from './productsReducer';
 
 export const ProductsContext = React.createContext<{
-  data?: any;
+  products?: Product[];
   isError?: boolean;
   isLoading?: boolean;
-  st?: boolean;
-  setSt?: React.Dispatch<React.SetStateAction<boolean>>;
 }>({});
 
-export const ProductsProvider = ({ children }: React.PropsWithChildren<unknown>) => {
-  const { data, isError, isLoading } = useQuery('products', getProducts);
-  const [st, setSt] = React.useState(false);
-  const memoProducts = React.useMemo(
-    () => ({
-      data,
-      isError,
-      isLoading,
-      setSt,
-      st,
-    }),
-    [data, isError, isLoading, st, setSt],
-  );
+const initialState = {
+  products: undefined,
+};
 
-  return <ProductsContext.Provider value={memoProducts}>{children}</ProductsContext.Provider>;
+export const ProductsProvider = ({ children }: React.PropsWithChildren<unknown>) => {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
+  const { data, isError, isLoading } = useQuery('products', getProducts);
+
+  const { products } = state;
+
+  React.useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    dispatch({ type: 'initialize', payload: data });
+  }, [data]);
+
+  return (
+    <ProductsContext.Provider
+      value={{
+        products,
+        isError,
+        isLoading,
+      }}
+    >
+      {children}
+    </ProductsContext.Provider>
+  );
 };

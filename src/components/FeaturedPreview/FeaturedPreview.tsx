@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import styled from 'styled-components';
 import LazyLoad from 'react-lazyload';
@@ -9,7 +10,8 @@ import { adaptive } from '../../common/tokens/screen';
 import { fontSizeLm, fontSizeXXL, fontSizeS } from '../../common/tokens/typography';
 import { ActionButton } from '../ActionButton';
 import { MainTypography, TYPOGRAPHY_TAGS } from '../MainTypography';
-import dogPic from './dog-pic.webp';
+import { Image } from '../../common/types/ProductTypes';
+import { locale } from './locales';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -67,24 +69,32 @@ const PreviewTooltip = styled.div`
 
 const LAZY_LOAD_HEIGHT = 500;
 
-export const FeaturedPreview = () => {
+type FeaturedPreviewProps = {
+  image?: Image;
+  name: string;
+};
+
+export const FeaturedPreview = ({ image, name }: FeaturedPreviewProps) => {
   return (
     <>
       <TitleWrapper>
-        <FeaturedTitle as={TYPOGRAPHY_TAGS.h1}>Samurai King Resting</FeaturedTitle>
+        <FeaturedTitle as={TYPOGRAPHY_TAGS.h1}>{name}</FeaturedTitle>
         <DesktopButton upperCase onClick={() => alert('added to cart')}>
-          Add to cart
+          {locale.actionButtonText}
         </DesktopButton>
       </TitleWrapper>
 
-      <PreviewWrapper>
-        <LazyLoad height={LAZY_LOAD_HEIGHT}>
-          <FeaturedPreviewImage src={dogPic} alt="Dog" />
-        </LazyLoad>
-        <PreviewTooltip>Photo of the day</PreviewTooltip>
-      </PreviewWrapper>
+      {image && (
+        <PreviewWrapper>
+          <LazyLoad height={LAZY_LOAD_HEIGHT}>
+            <FeaturedPreviewImage src={image.src} alt={image.alt} />
+          </LazyLoad>
+          <PreviewTooltip>{locale.tooltipText}</PreviewTooltip>
+        </PreviewWrapper>
+      )}
+
       <MobileButton upperCase onClick={() => alert('added to cart')}>
-        Add to cart
+        {locale.actionButtonText}
       </MobileButton>
     </>
   );

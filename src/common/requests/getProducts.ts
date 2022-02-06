@@ -1,8 +1,9 @@
 import { $api } from '../http';
+import { ProductsResponse } from '../types/ProductTypes';
 
 export const getProducts = async () => {
   try {
-    const { data } = await $api.post<{ products: [{ name: string }] }>('/mock-products', {
+    const { data } = await $api.post<ProductsResponse>('/mock-products', {
       data: {
         filters: {
           category: ['pets'],
@@ -10,7 +11,7 @@ export const getProducts = async () => {
       },
     });
 
-    return data;
+    return data?.products;
   } catch {
     console.log('Error with getting products');
   }

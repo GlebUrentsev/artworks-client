@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import { INDENT } from '../../common/tokens/indent';
 import { COLORS } from '../../common/tokens/palette';
 import { fontSizeL, fontSizeXL } from '../../common/tokens/typography';
+import { FeaturedProductDetails } from '../../common/types/ProductTypes';
 import { MainTypography } from '../MainTypography';
+import { locale } from './locales';
+import { capitalizeFirstLetter } from '../../common/utils/capitalizeFirstLetter';
 
 const DescriptionWrapper = styled.div`
   flex-basis: 55%;
@@ -22,19 +25,22 @@ const ProductDescription = styled.p`
   color: ${COLORS.gray};
 `;
 
-export const FeaturedDescription = () => {
+type FeaturedDescriptionProps = {
+  details?: FeaturedProductDetails;
+  name: string;
+  category: string;
+};
+
+export const FeaturedDescription = ({ details, name, category }: FeaturedDescriptionProps) => {
+  const description = details?.description;
+
   return (
     <DescriptionWrapper>
-      <MainTypography>About the Samurai King Resting</MainTypography>
-      <ProductCaregory>Pets</ProductCaregory>
-      <ProductDescription>
-        So how did the classical Latin become so incoherent? According to McClintock, a 15th century typesetter likely
-        scrambled part of Cicero&apos;s De Finibus in order to provide placeholder text to mockup various fonts for a
-        type specimen book.So how did the classical Latin become so incoherent? According to McClintock, a 15th century
-        typesetter likely scrambled part of Cicero&apos;s De Finibus in order to provide placeholder text to mockup
-        various fonts for a type specimen book.So how did the classical Latin become so incoherent? According to
-        McClintock.
-      </ProductDescription>
+      <MainTypography>
+        {locale.about} {capitalizeFirstLetter(name)}
+      </MainTypography>
+      <ProductCaregory>{category}</ProductCaregory>
+      {description && <ProductDescription>{description}</ProductDescription>}
     </DescriptionWrapper>
   );
 };

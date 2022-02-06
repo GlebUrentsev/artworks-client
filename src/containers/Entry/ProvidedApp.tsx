@@ -5,7 +5,13 @@ import { GlobalStyles } from '../../styled-utils/GlobalStyles';
 
 const App = React.lazy(() => import('./App'));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export const ProvidedApp = () => {
   return (

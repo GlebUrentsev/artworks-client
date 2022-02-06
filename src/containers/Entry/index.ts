@@ -1,0 +1,1 @@
+export { ProvidedApp } from './ProvidedApp';

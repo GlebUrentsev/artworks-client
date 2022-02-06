@@ -1,0 +1,1 @@
+export { FeaturedDescription } from './FeaturedDescription';

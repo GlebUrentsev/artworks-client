@@ -1,6 +1,10 @@
 # Artswork (Frontend)
 
-[Demo](/)
+### !Important 
+
+First open of the demo can fetch data for a bit longer because it's ping heroku service where backend was deployed.
+
+[Demo](https://hopeful-albattani-f70fc1.netlify.app/)
 
 ## Features
 
@@ -24,3 +28,9 @@
 ## Code style
 
 [Airbnb](https://github.com/airbnb/javascript)
+
+## Next steps
+
+1. Add ui-kit or lib (like meterial-ui) to avoid a lot styled components and dupticates
+2. Add redux to avoid a lot of react contexts
+3. Deploy backend to bolling service without delay (free heroku deploy needs ping)

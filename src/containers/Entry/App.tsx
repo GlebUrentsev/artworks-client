@@ -6,7 +6,7 @@ import { FeaturedProduct } from '../Featured';
 import { Header } from '../../components/Header';
 import { ProductsProvider } from '../../state';
 
-export const App = () => {
+const App = () => {
   return (
     <ProductsProvider>
       <AdaptiveLayout>
@@ -17,3 +17,5 @@ export const App = () => {
     </ProductsProvider>
   );
 };
+
+export default App;

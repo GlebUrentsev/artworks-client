@@ -9,7 +9,7 @@ import { adaptive } from '../../common/tokens/screen';
 import { fontSizeLm, fontSizeXXL, fontSizeS } from '../../common/tokens/typography';
 import { ActionButton } from '../ActionButton';
 import { MainTypography, TYPOGRAPHY_TAGS } from '../MainTypography';
-import dogPic from './dog-pic.png';
+import dogPic from './dog-pic.webp';
 
 const TitleWrapper = styled.div`
   display: flex;

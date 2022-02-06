@@ -65,6 +65,8 @@ const PreviewTooltip = styled.div`
   }
 `;
 
+const LAZY_LOAD_HEIGHT = 500;
+
 export const FeaturedPreview = () => {
   return (
     <>
@@ -76,7 +78,7 @@ export const FeaturedPreview = () => {
       </TitleWrapper>
 
       <PreviewWrapper>
-        <LazyLoad>
+        <LazyLoad height={LAZY_LOAD_HEIGHT}>
           <FeaturedPreviewImage src={dogPic} alt="Dog" />
         </LazyLoad>
         <PreviewTooltip>Photo of the day</PreviewTooltip>

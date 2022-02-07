@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fontSizeXL } from '../../common/tokens/typography';
+import { fontSizeXL } from '../../common/tokens';
 
 const Typography = styled.h1`
   ${fontSizeXL};

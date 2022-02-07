@@ -2,13 +2,11 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
 
-import { INDENT } from '../../common/tokens/indent';
-import { COLORS } from '../../common/tokens/palette';
-import { adaptive } from '../../common/tokens/screen';
-import { fontSizeM } from '../../common/tokens/typography';
+import { INDENT, COLORS, adaptive } from '../../common/tokens';
 import { FeaturedProductDetails } from '../../common/types/ProductTypes';
 import { locale } from './locales';
 import { MainTypography } from '../MainTypography';
+import { Details } from './Details';
 
 const RecommendationsContainer = styled.div`
   flex-basis: 40%;
@@ -52,11 +50,6 @@ const RecommendationPreview = styled.img`
   }
 `;
 
-const DetailsInfo = styled.p`
-  ${fontSizeM};
-  margin: ${INDENT.xxxs} ${INDENT.none};
-`;
-
 type FeaturedRecomendationProps = {
   details?: FeaturedProductDetails;
 };
@@ -68,28 +61,6 @@ export const FeaturedRecomendation = ({ details }: FeaturedRecomendationProps) =
 
   const { recommendations, dimentions, size } = details;
   const hasRecommendations = recommendations && recommendations.length > 0;
-
-  const detailsBlock = () => {
-    if (!dimentions) {
-      return null;
-    }
-
-    const { width, height } = dimentions;
-
-    return (
-      <>
-        <MainTypography>{locale.details}</MainTypography>
-        <DetailsInfo>
-          {locale.size}: {height} x {width} {locale.pixel}
-        </DetailsInfo>
-        {size && (
-          <DetailsInfo>
-            {locale.size}: {Math.ceil(size / 1000)} mb
-          </DetailsInfo>
-        )}
-      </>
-    );
-  };
 
   return (
     <RecommendationsContainer>
@@ -106,7 +77,7 @@ export const FeaturedRecomendation = ({ details }: FeaturedRecomendationProps) =
         </>
       )}
 
-      {detailsBlock()}
+      <Details dimentions={dimentions} size={size} />
     </RecommendationsContainer>
   );
 };

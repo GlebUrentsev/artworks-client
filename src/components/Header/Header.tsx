@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { BejamasLogo, Cart } from '../../common/assets';
-import { INDENT } from '../../common/tokens/indent';
-import { adaptive } from '../../common/tokens/screen';
-import { bottomDevider } from '../../styled-utils/bottom-devider';
+import { INDENT, adaptive } from '../../common/tokens';
+import { bottomDevider } from '../../common/styled-utils/bottom-devider';
 
 const HeaderWrapper = styled.div`
   display: flex;

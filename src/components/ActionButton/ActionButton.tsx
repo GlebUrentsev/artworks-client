@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { INDENT } from '../../common/tokens/indent';
-
-import { COLORS } from '../../common/tokens/palette';
-import { fontSizeXL } from '../../common/tokens/typography';
+import { INDENT, COLORS, fontSizeXL } from '../../common/tokens';
 
 const Button = styled.button<{ upperCase?: boolean }>`
   border: none;

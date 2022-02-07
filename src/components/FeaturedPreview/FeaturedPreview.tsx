@@ -3,11 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import LazyLoad from 'react-lazyload';
 
-import { INDENT } from '../../common/tokens/indent';
-import { COLORS } from '../../common/tokens/palette';
+import { INDENT, COLORS, adaptive, fontSizeLm, fontSizeXXL, fontSizeS } from '../../common/tokens';
 
-import { adaptive } from '../../common/tokens/screen';
-import { fontSizeLm, fontSizeXXL, fontSizeS } from '../../common/tokens/typography';
 import { ActionButton } from '../ActionButton';
 import { MainTypography, TYPOGRAPHY_TAGS } from '../MainTypography';
 import { Image } from '../../common/types/ProductTypes';

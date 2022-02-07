@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { INDENT } from '../../common/tokens/indent';
-import { adaptive, breakpoints } from '../../common/tokens/screen';
+import { INDENT, adaptive, breakpoints } from '../../common/tokens';
 
 const LayoutComponent = styled.div`
   margin: ${INDENT.none} ${INDENT.auto};

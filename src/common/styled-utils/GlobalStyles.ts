@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { fontSizeL } from '../common/tokens/typography';
+import { fontSizeL } from '../tokens';
 
 export const GlobalStyles = createGlobalStyle`
   * {

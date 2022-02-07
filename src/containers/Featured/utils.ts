@@ -1,10 +1,6 @@
 import { Product } from '../../common/types/ProductTypes';
 
-export const getFeaturedProduct = (products?: Product[]): Product | undefined => {
-  if (!products) {
-    return undefined;
-  }
-
+export const getFeaturedProduct = (products: Product[]): Product | undefined => {
   const featuredProduct = products.find((product) => {
     const { featured, details } = product;
 

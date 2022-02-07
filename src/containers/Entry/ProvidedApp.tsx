@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
-import { GlobalStyles } from '../../styled-utils/GlobalStyles';
+import { GlobalStyles } from '../../common/styled-utils/GlobalStyles';
 
 const App = React.lazy(() => import('./App'));
 

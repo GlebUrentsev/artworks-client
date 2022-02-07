@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { INDENT } from '../../common/tokens/indent';
-import { COLORS } from '../../common/tokens/palette';
-import { fontSizeL, fontSizeXL } from '../../common/tokens/typography';
+import { INDENT, COLORS, fontSizeL, fontSizeXL } from '../../common/tokens';
 import { FeaturedProductDetails } from '../../common/types/ProductTypes';
 import { MainTypography } from '../MainTypography';
 import { locale } from './locales';

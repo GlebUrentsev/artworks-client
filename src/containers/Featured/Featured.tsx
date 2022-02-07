@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 import { FeaturedPreview } from '../../components/FeaturedPreview/FeaturedPreview';
 import { FeaturedDescription } from '../../components/FeaturedDescription';
-import { adaptive } from '../../common/tokens/screen';
-import { INDENT } from '../../common/tokens/indent';
-import { bottomDevider } from '../../styled-utils/bottom-devider';
+import { adaptive, INDENT } from '../../common/tokens';
+import { bottomDevider } from '../../common/styled-utils/bottom-devider';
 import { FeaturedRecomendation } from '../../components/FeaturedRecomendation';
 import { ProductsContext } from '../../state/ProductsProvider';
 import { getFeaturedProduct } from './utils';

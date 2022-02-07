@@ -65,6 +65,7 @@
     "no-restricted-exports": "off",
     "@typescript-eslint/naming-convention": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "react/jsx-no-constructed-context-values": "off"
+    "react/jsx-no-constructed-context-values": "off",
+    "react/no-unused-prop-types": "off"
   }
 }

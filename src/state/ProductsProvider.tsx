@@ -3,16 +3,20 @@ import { useQuery } from 'react-query';
 
 import { getProducts } from '../common/requests';
 import { Product } from '../common/types/ProductTypes';
-import { reducer } from './productsReducer';
+import { reducer } from './reducers/productsReducer';
 
 export const ProductsContext = React.createContext<{
-  products?: Product[];
-  isError?: boolean;
-  isLoading?: boolean;
-}>({});
+  products: Product[];
+  isError: boolean;
+  isLoading: boolean;
+}>({
+  products: [],
+  isError: false,
+  isLoading: false,
+});
 
 const initialState = {
-  products: undefined,
+  products: [],
 };
 
 export const ProductsProvider = ({ children }: React.PropsWithChildren<unknown>) => {

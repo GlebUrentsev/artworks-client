@@ -79,6 +79,7 @@ export const MobilePanel = ({ children, isOpen, onClear, onSave }: React.PropsWi
     return null;
   }
 
+  // TODO - better to do buttons like bottomSlot prop
   return (
     <>
       <MobilePanelOverlay />

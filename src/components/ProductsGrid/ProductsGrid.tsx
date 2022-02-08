@@ -1,6 +1,7 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
+import { ADD_TO_CART } from '../../common/constants/locales';
 
 import { adaptive, COLORS, fontSizeXXL, fontSizeXL, INDENT, fontSizeXLX, fontSizeLm } from '../../common/tokens';
 import { CartProduct, Product } from '../../common/types/ProductTypes';
@@ -143,7 +144,7 @@ export const ProductsGrid = ({ products, lastIndexToSlice, firstIndexToSlice, ad
                 })
               }
             >
-              Add to cart
+              {ADD_TO_CART}
             </CardActioButton>
           </FilteredGridCard>
 

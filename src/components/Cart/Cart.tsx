@@ -79,6 +79,7 @@ const ClearButton = styled.div`
   cursor: pointer;
   text-transform: uppercase;
   ${fontSizeXL};
+  text-align: center;
 `;
 
 type CartProps = {

@@ -26,18 +26,18 @@ const ProductBottomContainer = styled.div`
 `;
 
 export const FeaturedProduct = () => {
-  const { products } = React.useContext(ProductsContext);
+  const { products, addToCart } = React.useContext(ProductsContext);
   const featuredProduct = React.useMemo(() => getFeaturedProduct(products), [products]);
 
   if (!featuredProduct) {
     return null;
   }
 
-  const { image, name, details, category } = featuredProduct;
+  const { image, name, details, category, _id: id, price, currency } = featuredProduct;
 
   return (
     <ProductContainer>
-      <FeaturedPreview image={image} name={name} />
+      <FeaturedPreview image={image} name={name} addToCart={addToCart} id={id} price={price} currency={currency} />
       <ProductBottomContainer>
         <FeaturedDescription details={details} name={name} category={category} />
         <FeaturedRecomendation details={details} />

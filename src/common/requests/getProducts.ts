@@ -1,18 +1,13 @@
+/* eslint-disable no-console */
 import { $api } from '../http';
 import { ProductsResponse } from '../types/ProductTypes';
 
 export const getProducts = async () => {
   try {
-    const { data } = await $api.post<ProductsResponse>('/mock-products', {
-      data: {
-        filters: {
-          category: ['pets'],
-        },
-      },
-    });
+    const { data } = await $api.get<ProductsResponse>('/products');
 
-    return data?.products;
-  } catch {
-    console.log('Error with getting products');
+    return data;
+  } catch (e) {
+    console.log('Error with getting products', e);
   }
 };

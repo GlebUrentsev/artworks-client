@@ -3,17 +3,11 @@ import LazyLoad from 'react-lazyload';
 import styled from 'styled-components';
 
 import { adaptive, COLORS, fontSizeXXL, fontSizeXL, INDENT, fontSizeXLX, fontSizeLm } from '../../common/tokens';
-import { Product } from '../../common/types/ProductTypes';
+import { CartProduct, Product } from '../../common/types/ProductTypes';
 import { capitalizeFirstLetter } from '../../common/utils/capitalizeFirstLetter';
 import { getCurrencyPrice } from '../../common/utils/getCurrencyPrice';
 import { ActionButton } from '../ActionButton';
 import { MainTypography } from '../MainTypography';
-
-type ProductsGridProps = {
-  products: Product[];
-  lastIndexToSlice: number;
-  firstIndexToSlice: number;
-};
 
 const FilteredGridCard = styled.div`
   display: flex;
@@ -44,6 +38,10 @@ const CardActioButton = styled(ActionButton)`
   &:hover {
     display: block;
   }
+
+  ${adaptive.maxWidth.tablet} {
+    display: block;
+  }
 `;
 
 const FilteredGridImage = styled.img`
@@ -55,6 +53,11 @@ const FilteredGridImage = styled.img`
 
   &:hover ~ ${CardActioButton} {
     display: block;
+  }
+
+  ${adaptive.maxWidth.tablet} {
+    height: unset;
+    max-width: none;
   }
 `;
 
@@ -108,7 +111,14 @@ const EmptyProducts = styled.div`
   width: 100%;
 `;
 
-export const ProductsGrid = ({ products, lastIndexToSlice, firstIndexToSlice }: ProductsGridProps) => {
+type ProductsGridProps = {
+  products: Product[];
+  lastIndexToSlice: number;
+  firstIndexToSlice: number;
+  addToCart: (product: CartProduct) => void;
+};
+
+export const ProductsGrid = ({ products, lastIndexToSlice, firstIndexToSlice, addToCart }: ProductsGridProps) => {
   if (products.length === 0) {
     return <EmptyProducts>No products</EmptyProducts>;
   }
@@ -117,12 +127,24 @@ export const ProductsGrid = ({ products, lastIndexToSlice, firstIndexToSlice }: 
 
   return (
     <FilteredGrid>
-      {slicedProducts.map(({ image, price, name, category, currency, bestseller }) => (
+      {slicedProducts.map(({ _id, image, price, name, category, currency, bestseller }) => (
         <LazyLoad key={image?.src}>
           <FilteredGridCard>
             <FilteredGridImage src={image?.src} />
             {bestseller && <BestSellerTooltip>Best Seller</BestSellerTooltip>}
-            <CardActioButton>Add to cart</CardActioButton>
+            <CardActioButton
+              onClick={() =>
+                addToCart({
+                  _id,
+                  image,
+                  price,
+                  name,
+                  currency,
+                })
+              }
+            >
+              Add to cart
+            </CardActioButton>
           </FilteredGridCard>
 
           <Category>{capitalizeFirstLetter(category)}</Category>

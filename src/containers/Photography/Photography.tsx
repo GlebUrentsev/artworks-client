@@ -14,6 +14,9 @@ import { useFilters } from './hooks/useFilters';
 import { FilterGroup } from '../../components/FilterGroup';
 import { PRICE_FILTER_MAP } from '../../common/constants/filters';
 import { SORT_VARIANTS } from '../../common/constants/sorting';
+import { Spinner } from '../../components/Spinner';
+import { useBreakpointState } from '../../common/breakpoints';
+import { MobilePanel } from '../../components/MobilePanel';
 
 const PhotographyContainer = styled.div`
   margin: ${INDENT.xxxl} ${INDENT.none};
@@ -32,10 +35,6 @@ const FilteredProducts = styled.div`
 
 const Filters = styled.div`
   width: 268px;
-
-  ${adaptive.maxWidth.desktopS} {
-    display: none;
-  }
 `;
 
 const FilteredContent = styled.div<{ noProducts: boolean }>`
@@ -54,11 +53,14 @@ const FilteredContent = styled.div<{ noProducts: boolean }>`
 `;
 
 export const Photography = () => {
-  const { products } = React.useContext(ProductsContext);
+  const { isMobile, isTablet, isDesktopS, isDesktopM, isDesktopL } = useBreakpointState();
+  const [mobilePanelOpen, setMobilePanelOpen] = React.useState(false);
+  const { products, isLoading, addToCart } = React.useContext(ProductsContext);
   const uniqueCategories = React.useMemo(() => getCategories(products), [products]);
 
   const { isAscending, setIsAscending, setSortingVariant, sortingVariant } = useSorting();
-  const { priceFilter, multipleFilters, onPriceFilterChange, onMultipleFilterChange } = useFilters();
+  const { priceFilter, multipleFilters, onPriceFilterChange, onMultipleFilterChange, onMultipleFilterClear } =
+    useFilters();
   const [currentPage, setCurrentPage] = React.useState(1);
 
   const changedProducts = React.useMemo(
@@ -77,11 +79,50 @@ export const Photography = () => {
   const firstIndexToSlice = lastIndexToSlice - PAGINATION_OFFSET;
   const isEpmptyProducts = changedProducts.length === 0;
 
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  const renderFiltersOnDesktop = isDesktopS || isDesktopM || isDesktopL;
+  const renderFiltersOnMobile = isMobile || isTablet;
+
+  const filters = (
+    <Filters>
+      <FilterGroup
+        filterName="category"
+        title="category"
+        variant="multiple"
+        uniqueCategories={uniqueCategories}
+        onMultipleFilterChange={onMultipleFilterChange}
+        multipleFilters={multipleFilters}
+      />
+
+      <FilterGroup
+        variant="single"
+        title="price"
+        priceFitersMap={PRICE_FILTER_MAP}
+        onPriceFilterChange={onPriceFilterChange}
+        priceFilter={priceFilter}
+      />
+    </Filters>
+  );
+
+  const handleFilterCancel = () => {
+    onPriceFilterChange(undefined);
+    onMultipleFilterClear();
+    setMobilePanelOpen(false);
+  };
+
+  const handleSaveFilters = () => {
+    setMobilePanelOpen(false);
+  };
+
   return (
     <PhotographyContainer>
       <TitleWrapper>
         <TitleWithCategory title="Photography" subtitle="Premium Photos" />
         <SortingControls
+          onMobilePanelToggle={() => setMobilePanelOpen((prev) => !prev)}
           onSortChange={setSortingVariant}
           onAscendingChange={setIsAscending}
           sortVariants={SORT_VARIANTS}
@@ -90,29 +131,33 @@ export const Photography = () => {
       </TitleWrapper>
 
       <FilteredProducts>
-        <Filters>
-          <FilterGroup
-            filterName="category"
-            title="category"
-            variant="multiple"
-            uniqueCategories={uniqueCategories}
-            onMultipleFilterChange={onMultipleFilterChange}
-          />
+        {renderFiltersOnDesktop && (
+          <Filters>
+            <FilterGroup
+              filterName="category"
+              title="category"
+              variant="multiple"
+              uniqueCategories={uniqueCategories}
+              onMultipleFilterChange={onMultipleFilterChange}
+              multipleFilters={multipleFilters}
+            />
 
-          <FilterGroup
-            variant="single"
-            title="price"
-            priceFitersMap={PRICE_FILTER_MAP}
-            onPriceFilterChange={onPriceFilterChange}
-            priceFilter={priceFilter}
-          />
-        </Filters>
+            <FilterGroup
+              variant="single"
+              title="price"
+              priceFitersMap={PRICE_FILTER_MAP}
+              onPriceFilterChange={onPriceFilterChange}
+              priceFilter={priceFilter}
+            />
+          </Filters>
+        )}
 
         <FilteredContent noProducts={isEpmptyProducts}>
           <ProductsGrid
             products={changedProducts}
             firstIndexToSlice={firstIndexToSlice}
             lastIndexToSlice={lastIndexToSlice}
+            addToCart={addToCart}
           />
 
           <Pagination
@@ -123,6 +168,11 @@ export const Photography = () => {
           />
         </FilteredContent>
       </FilteredProducts>
+      {renderFiltersOnMobile && (
+        <MobilePanel onClear={handleFilterCancel} onSave={handleSaveFilters} isOpen={mobilePanelOpen}>
+          {filters}
+        </MobilePanel>
+      )}
     </PhotographyContainer>
   );
 };

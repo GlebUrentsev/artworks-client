@@ -14,6 +14,7 @@ export type FeaturedProductDetails = {
 };
 
 export type Product = {
+  _id: string;
   name: string;
   category: string;
   price: number;
@@ -24,4 +25,6 @@ export type Product = {
   details?: FeaturedProductDetails;
 };
 
-export type ProductsResponse = { products: Product[] };
+export type ProductsResponse = Product[];
+
+export type CartProduct = Pick<Product, '_id' | 'price' | 'image' | 'name' | 'currency'>;

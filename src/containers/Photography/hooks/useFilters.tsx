@@ -39,10 +39,15 @@ export const useFilters = () => {
     });
   };
 
+  const clearMultipleFilters = () => {
+    setMultipleFilters({});
+  };
+
   return {
     multipleFilters,
     priceFilter,
     onPriceFilterChange: setPriceFilter,
     onMultipleFilterChange: handleMultipleFilterChange,
+    onMultipleFilterClear: clearMultipleFilters,
   };
 };

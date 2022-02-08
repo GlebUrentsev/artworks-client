@@ -7,8 +7,9 @@ import { INDENT, COLORS, adaptive, fontSizeLm, fontSizeXXL, fontSizeS } from '..
 
 import { ActionButton } from '../ActionButton';
 import { MainTypography, TYPOGRAPHY_TAGS } from '../MainTypography';
-import { Image } from '../../common/types/ProductTypes';
+import { CartProduct, Image } from '../../common/types/ProductTypes';
 import { locale } from './locales';
+import { useBreakpointState } from '../../common/breakpoints';
 
 const TitleWrapper = styled.div`
   display: flex;
@@ -69,15 +70,31 @@ const LAZY_LOAD_HEIGHT = 500;
 type FeaturedPreviewProps = {
   image?: Image;
   name: string;
+  id: string;
+  price: number;
+  currency: string;
+  addToCart: (product: CartProduct) => void;
 };
 
-export const FeaturedPreview = ({ image, name }: FeaturedPreviewProps) => {
+export const FeaturedPreview = ({ image, name, price, currency, id, addToCart }: FeaturedPreviewProps) => {
+  const handleAddToCart = () => {
+    addToCart({
+      image,
+      name,
+      _id: id,
+      currency,
+      price,
+    });
+  };
+
+  const buttonContent = locale.actionButtonText;
+
   return (
     <>
       <TitleWrapper>
         <FeaturedTitle as={TYPOGRAPHY_TAGS.h1}>{name}</FeaturedTitle>
-        <DesktopButton upperCase onClick={() => alert('added to cart')}>
-          {locale.actionButtonText}
+        <DesktopButton upperCase onClick={handleAddToCart}>
+          {buttonContent}
         </DesktopButton>
       </TitleWrapper>
 
@@ -90,8 +107,8 @@ export const FeaturedPreview = ({ image, name }: FeaturedPreviewProps) => {
         </PreviewWrapper>
       )}
 
-      <MobileButton upperCase onClick={() => alert('added to cart')}>
-        {locale.actionButtonText}
+      <MobileButton upperCase onClick={handleAddToCart}>
+        {buttonContent}
       </MobileButton>
     </>
   );

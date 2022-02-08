@@ -29,6 +29,7 @@ type MultipleProps = {
   uniqueCategories: string[];
   filterName: string;
   onMultipleFilterChange: (category: string, filterToApply: string) => void;
+  multipleFilters: Record<string, string[]>;
 };
 
 type SingleProps = {
@@ -62,6 +63,7 @@ export const FilterGroup = (props: React.PropsWithChildren<FilterProps>) => {
                 type="checkbox"
                 id={uniqueCategory}
                 name={capitalizeFirstLetter(uniqueCategory)}
+                checked={Boolean(props.multipleFilters[props.filterName]?.includes(uniqueCategory))}
                 onChange={() => {
                   props.onMultipleFilterChange(props.filterName, uniqueCategory);
                 }}
@@ -93,7 +95,7 @@ export const FilterGroup = (props: React.PropsWithChildren<FilterProps>) => {
               name="price"
               type="radio"
               id={priceVariantKey}
-              checked={priceFilter?.filterType === priceVariantKey}
+              checked={Boolean(priceFilter?.filterType === priceVariantKey)}
               onChange={() =>
                 onPriceFilterChange({
                   filterType: priceVariantKey as PRICE_FILTER_KEY,

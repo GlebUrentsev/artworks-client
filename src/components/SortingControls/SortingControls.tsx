@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { SortArrows } from '../../common/assets';
+import { FilterSvg, SortArrows } from '../../common/assets';
+import { useBreakpointState } from '../../common/breakpoints';
 import { COLORS, INDENT, adaptive, fontSizeL, fontSizeXL } from '../../common/tokens';
 import { SortVariantsKeys } from '../../common/types/Sorting';
 import { MainTypography } from '../MainTypography';
@@ -52,6 +53,7 @@ type SortingControlsProps = {
   onAscendingChange: React.Dispatch<React.SetStateAction<boolean>>;
   sortVariants: Record<string, string>;
   itemsLength: number;
+  onMobilePanelToggle: () => void;
 };
 
 const DEFAULT_SELECT_VALUE = 'none';
@@ -61,9 +63,16 @@ export const SortingControls = ({
   onAscendingChange,
   sortVariants,
   itemsLength,
+  onMobilePanelToggle,
 }: SortingControlsProps) => {
+  const { isTablet, isMobile } = useBreakpointState();
+
   if (itemsLength === 0) {
     return null;
+  }
+
+  if (isTablet || isMobile) {
+    return <FilterSvg onClick={onMobilePanelToggle} />;
   }
 
   return (

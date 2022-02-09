@@ -75,7 +75,12 @@ export const Pagination = <T,>({ onPageChange, currentPage, items, paginationOff
         <ArrowLeft />
       </PaginationControl>
       {getItemsArray(count).map((item) => (
-        <PaginationButton key={item} type="button" isSelected={currentPage === item + 1}>
+        <PaginationButton
+          key={item}
+          type="button"
+          isSelected={currentPage === item + 1}
+          onClick={() => onPageChange(item + 1)}
+        >
           {item + 1}
         </PaginationButton>
       ))}

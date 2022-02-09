@@ -47,7 +47,7 @@ const FilteredContent = styled.div<{ noProducts: boolean }>`
     `}
 
   ${adaptive.maxWidth.desktopS} {
-    margin: ${INDENT.auto};
+    margin: ${INDENT.none} ${INDENT.auto};
     width: 100%;
   }
 `;
